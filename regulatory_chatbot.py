@@ -1,28 +1,13 @@
-import openai
 import streamlit as st
 import requests
 import pdfplumber
 
 # OpenAI API-Key (ersetzen!)
 OPENAI_API_KEY = "DEIN_OPENAI_API_KEY"
-openai.api_key = OPENAI_API_KEY
 
 st.set_page_config(page_title="KI Regulatory Affairs Chatbot", layout="wide")
 st.sidebar.title("⚙️ Navigation")
 page = st.sidebar.radio("Wähle eine Funktion:", ["🔍 Regulatory Chat", "📊 FDA-Suche", "📄 Dokumentenprüfung", "✅ MDR-Checkliste"])
-
-# GPT-4 Kommunikation
-def ask_gpt(question):
-    """Kommunikation mit GPT-4 zur Beantwortung von Regulatory-Fragen"""
-    try:
-        response = openai.ChatCompletion.create(
-            model="gpt-4",
-            messages=[{"role": "system", "content": "Du bist ein Experte für Regulatory Affairs in der Medizintechnik."},
-                      {"role": "user", "content": question}]
-        )
-        return response["choices"][0]["message"]["content"]
-    except Exception as e:
-        return f"❌ Fehler: {str(e)}"
 
 # 📌 Regulatory Chat
 if page == "🔍 Regulatory Chat":
@@ -30,9 +15,8 @@ if page == "🔍 Regulatory Chat":
     user_input = st.text_input("Deine Frage:")
     if st.button("Antwort erhalten"):
         if user_input:
-            response = ask_gpt(user_input)
             st.write("💡 **Antwort:**")
-            st.write(response)
+            st.write("(Antwort von KI würde hier erscheinen)")
         else:
             st.warning("Bitte eine Frage eingeben!")
 
@@ -74,10 +58,9 @@ elif page == "📄 Dokumentenprüfung":
             st.write(text[:1000])
 
         if st.button("Analyse starten"):
-            shortened_text = text[:2000]  # Begrenzung für GPT
-            response = ask_gpt(f"Prüfe dieses Dokument auf MDR-Compliance: {shortened_text}")
+            shortened_text = text[:2000]  # Begrenzung für KI
             st.write("💡 **Ergebnisse der Analyse:**")
-            st.write(response)
+            st.write("(Analyseergebnisse würden hier erscheinen)")
 
 # ✅ MDR-Checkliste
 elif page == "✅ MDR-Checkliste":
