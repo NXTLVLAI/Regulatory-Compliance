@@ -3,7 +3,7 @@ import requests
 import pdfplumber
 
 # OpenAI API-Key (ersetzen!)
-OPENAI_API_KEY = "DEIN_OPENAI_API_KEY"
+OPENAI_API_KEY = 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
 
 st.set_page_config(page_title="KI Regulatory Affairs Chatbot", layout="wide")
 st.sidebar.title("⚙️ Navigation")
